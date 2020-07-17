@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -430,14 +430,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-08
+                    2020-07-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    755
+                    807
                 </div>
                 
 
@@ -455,9 +455,9 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="发布新博客"><a href="#发布新博客" class="headerlink" title="发布新博客"></a>发布新博客</h2><ol>
-<li>创建新博客<pre><code class="python">hexo new post &quot;新的博客名&quot;</code></pre>
+<li>创建新博客<pre class=" language-bash"><code class="language-bash">hexo new post <span class="token string">"新的博客名"</span></code></pre>
 会在<code>C:\code\git\hhhOscar.github.io\source\_posts</code>目录下新创建一个<code>资源（图片）文件夹</code>和一个<code>.md</code>文件</li>
-<li>发布博客<pre><code class="bash">hexo g     // 生成静态网页
+<li>发布博客<pre class=" language-bash"><code class="language-bash">hexo g     // 生成静态网页
 hexo s     // 本地预览效果
 hexo d     // 上传到Github上</code></pre>
 </li>
@@ -546,41 +546,43 @@ hexo d     // 上传到Github上</code></pre>
 <td>文章转载规则， 可以是 cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint 或 pay 中的一个</td>
 </tr>
 </tbody></table>
-<h3 id="最全示例"><a href="#最全示例" class="headerlink" title="最全示例"></a>最全示例</h3><pre><code class="yaml">---
-title: hexo搭建博客基本用法
-date: 2020-05-08 13:10:25
-author: RockZ
-img: /source/images/xxx.jpg
-top: true
-cover: true
-coverImg: /images/1.jpg
-password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
-toc: true
-mathjax: false
-summary: 这是你自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要
-categories: Markdown
-tags:
-  - Hexo
-  - Github
----</code></pre>
-<pre><code class="css">pre {
-    /* padding: 1.5rem !important; */
-    padding: 1.5rem 1.5rem 1.5rem 3.3rem !important;
-    margin: 1rem 0 !important;
-    background: #272822;
-    overflow: auto;
-    border-radius: 0.35rem;
-    tab-size: 4;
-}
+<h3 id="最全示例"><a href="#最全示例" class="headerlink" title="最全示例"></a>最全示例</h3><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> hexo搭建博客基本用法
+<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2020-05-08 13:10:25</span>
+<span class="token key atrule">author</span><span class="token punctuation">:</span> RockZ
+<span class="token key atrule">img</span><span class="token punctuation">:</span> /source/images/xxx.jpg
+<span class="token key atrule">top</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">cover</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">coverImg</span><span class="token punctuation">:</span> /images/1.jpg
+<span class="token key atrule">password</span><span class="token punctuation">:</span> 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+<span class="token key atrule">toc</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">mathjax</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+<span class="token key atrule">summary</span><span class="token punctuation">:</span> 这是你自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要
+<span class="token key atrule">categories</span><span class="token punctuation">:</span> Markdown
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> Hexo
+  <span class="token punctuation">-</span> Github</code></pre>
+<h2 id="代码块怎么写"><a href="#代码块怎么写" class="headerlink" title="代码块怎么写"></a>代码块怎么写</h2><h3 id="css实例"><a href="#css实例" class="headerlink" title="css实例"></a>css实例</h3><pre class=" language-css"><code class="language-css"><span class="token selector">pre </span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* padding: 1.5rem !important; */</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">1.5</span>rem <span class="token number">1.5</span>rem <span class="token number">1.5</span>rem <span class="token number">3.3</span>rem <span class="token important">!important</span><span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">1</span>rem <span class="token number">0</span> <span class="token important">!important</span><span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#272822</span><span class="token punctuation">;</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">0.35</span>rem<span class="token punctuation">;</span>
+    <span class="token property">tab-size</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-code {
-    padding: 1px 5px;
-    font-family: Inconsolata, Monaco, Consolas, &#39;Courier New&#39;, Courier, monospace;
-    /* font-size: 0.91rem; */
-    color: #e96900;
-    background-color: #f8f8f8;
-    border-radius: 2px;
-}</code></pre>
+<span class="token selector">code </span><span class="token punctuation">{</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">1</span>px <span class="token number">5</span>px<span class="token punctuation">;</span>
+    <span class="token property">font-family</span><span class="token punctuation">:</span> Inconsolata, Monaco, Consolas, <span class="token string">'Courier New'</span>, Courier, monospace<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/* font-size: 0.91rem; */</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode">#e96900</span><span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#f8f8f8</span><span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">2</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="如何在md文件中书写"><a href="#如何在md文件中书写" class="headerlink" title="如何在md文件中书写"></a>如何在md文件中书写</h3><pre><code>```css
+your code here
+```</code></pre><h3 id="支持语言"><a href="#支持语言" class="headerlink" title="支持语言"></a>支持语言</h3><p><a href="https://prismjs.com/#languages-list" target="_blank" rel="noopener">官方文档</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">github上的hexo主题</a><br><a href="https://godweiyang.com/2018/04/13/hexo-blog/" target="_blank" rel="noopener">超详细Hexo+Github博客搭建小白教程</a><br><a href="https://segmentfault.com/a/1190000007261752?utm_source=sf-related" target="_blank" rel="noopener">Hexo下mathjax的转义问题</a></p>
 
             </div>
             <hr/>
@@ -676,30 +678,24 @@ code {
         margin: 40px 0;
         text-align: center;
     }
-
     #reward .reward-link {
         font-size: 1.4rem;
         line-height: 38px;
     }
-
     #reward .btn-floating:hover {
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
     }
-
     #rewardModal {
         width: 320px;
         height: 350px;
     }
-
     #rewardModal .reward-title {
         margin: 15px auto;
         padding-bottom: 5px;
     }
-
     #rewardModal .modal-content {
         padding: 10px;
     }
-
     #rewardModal .close {
         position: absolute;
         right: 15px;
@@ -709,7 +705,6 @@ code {
         line-height: 20px;
         cursor: pointer;
     }
-
     #rewardModal .close:hover {
         color: #ef5350;
         transform: scale(1.3);
@@ -717,47 +712,38 @@ code {
         -webkit-transform:scale(1.3);
         -o-transform:scale(1.3);
     }
-
     #rewardModal .reward-tabs {
         margin: 0 auto;
         width: 210px;
     }
-
     .reward-tabs .tabs {
         height: 38px;
         margin: 10px auto;
         padding-left: 0;
     }
-
     .reward-content ul {
         padding-left: 0 !important;
     }
-
     .reward-tabs .tabs .tab {
         height: 38px;
         line-height: 38px;
     }
-
     .reward-tabs .tab a {
         color: #fff;
         background-color: #ccc;
     }
-
     .reward-tabs .tab a:hover {
         background-color: #ccc;
         color: #fff;
     }
-
     .reward-tabs .wechat-tab .active {
         color: #fff !important;
         background-color: #22AB38 !important;
     }
-
     .reward-tabs .alipay-tab .active {
         color: #fff !important;
         background-color: #019FE8 !important;
     }
-
     .reward-tabs .reward-img {
         width: 210px;
         height: 210px;
@@ -795,7 +781,6 @@ code {
         $('.tabs').tabs();
     });
 </script>
-
             
         </div>
     </div>
@@ -817,52 +802,46 @@ code {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/08/hexo-da-jian-bo-ke-ji-ben-yong-fa/">
+                <a href="/2020/07/05/gai-lu-lun-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="hexo搭建博客基本用法">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="概率论总结">
                         
-                        <span class="card-title">hexo搭建博客基本用法</span>
+                        <span class="card-title">概率论总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文对hexo搭建博客的基本用法做一个记录
+                            对概率论学习的一个总结
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    工具
+                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
+                                    数学
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                    <a href="/tags/Github/">
-                        <span class="chip bg-color">Github</span>
+                    <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
+                        <span class="chip bg-color">概率论</span>
                     </a>
                     
                 </div>
@@ -1089,7 +1068,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">830</span>&nbsp;字
+                class="white-color">1.4k</span>&nbsp;字
             
             
             
@@ -1145,16 +1124,16 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     $(document).ready(function () {
 
         var int = setInterval(fixCount, 50);  // 50ms周期检测函数
-        var pvcountOffset = -20252061;  // 初始化首次数据
-        var uvcountOffset = -1436150;
+        //var pvcountOffset = -20252061;  // 初始化首次数据
+        //var uvcountOffset = -1436150;
 
         function fixCount() {
             if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) /*+ pvcountOffset*/);
                 clearInterval(int);
             }
             if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) /*+ uvcountOffset*/); // 加上初始数据
                 clearInterval(int); // 停止检测
             }
         }

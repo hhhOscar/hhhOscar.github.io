@@ -1141,7 +1141,6 @@ table tr:nth-child(2n), thead {
 
 #article-share .social-share {
     text-align: center;
-    margin: 30px 0;
 }
 
 @media only screen and (min-width: 600px) {
