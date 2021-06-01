@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="概率论总结, 小周的博客">
+    <meta name="keywords" content="Java并发1-线程模型, 小周的博客">
     <meta name="description" content="想要不断进步的普通人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>概率论总结 | 小周的博客</title>
+    <title>Java并发1-线程模型 | 小周的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -264,12 +264,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">概率论总结</h1>
+                    <h1 class="description center-align post-title">Java并发1-线程模型</h1>
                 </div>
             </div>
         </div>
@@ -394,8 +394,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                <span class="chip bg-color">概率论</span>
+                            <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                                <span class="chip bg-color">Java并发</span>
                             </a>
                         
                     </div>
@@ -406,8 +406,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
-                                数学
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-07-05
+                    2021-06-01
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-06
+                    2021-06-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    481
+                    411
                 </div>
                 
 
@@ -450,29 +450,19 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<h2 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h2></blockquote>
-<h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><ol>
-<li>随机现象：在一定的条件下，并不总是出现相同结果的现象称为随机现象。</li>
-<li>随机试验：对在相同条件下可以重复的随机现象的观察、记录、试验称为随机试验。也有很多随机现象是不可重复的（例如：某场足球赛的胜负是无法重复的）。概率论与数理统计主要研究能大量重复的随机现象，但后者同样重要。</li>
-<li>样本空间与样本点：随机现象的一切可能出现的基本结果组成的集合称为样本空间，记为 $ \Omega=\{\omega\} $，其中 $ \omega $ 为样本点，表示可能出现的基本结果。</li>
-<li>随机变量：给定一个随机现象和它对应的样本空间，一个随机变量X给每个基本结果（样本点）赋予一个数值的值。Methematically,a random variable is a real-valued function of the experimental outcome.</li>
+                <h2 id="Java线程模型"><a href="#Java线程模型" class="headerlink" title="Java线程模型"></a>Java线程模型</h2><h3 id="什么是线程模型？为什么要有线程模型？"><a href="#什么是线程模型？为什么要有线程模型？" class="headerlink" title="什么是线程模型？为什么要有线程模型？"></a>什么是线程模型？为什么要有线程模型？</h3><blockquote>
+<p>什么是线程模型</p>
+</blockquote>
+<p>Java字节码运行在JVM中，通过Java字节码创建的线程，我们叫它<code>JVM线程</code><br>JVM运行在各种操作系统上，当JVM想进行线程创建、线程回收的操作，需要进行操作系统级的系统调用，在操作系统中创建、回收真正的线程。这种“真正的线程”我们称为<code>操作系统线程</code><br>可以看出，<code>JVM线程</code>和<code>操作系统线程</code>存在着某种映射关系。这种映射关系（两种线程之间的规范和协议）叫做<code>线程模型</code></p>
+<blockquote>
+<p>为什么要有线程模型</p>
+</blockquote>
+<p>没有线程模型，难道你要手动调用操作系统的接口，直接对<code>操作系统线程</code>操作吗？<br>答案是：<code>抽象！</code><br>JVM为各种操作系统的原生线程进行了高级抽象，提供了统一的<code>JVM线程接口</code>给开发者使用，它不香吗？<br>之所以要学，是因为我们要知其然，还要知其所以然~</p>
+<h3 id="线程模型分类"><a href="#线程模型分类" class="headerlink" title="线程模型分类"></a>线程模型分类</h3><ol>
+<li>一对一<br>用户线程和内核线程一一对应<br>优点：简单、易用<br>缺点：内核创建线程是有上限的，进而影响用户线程的高并发。</li>
+<li>多对一<br>多个用户线程对应一个内核线程<br>优点：扩展了用户线程的上限<br>缺点：一个用户线程进行系统调用并阻塞，会导致内核线程组内的所有线程都无法进行内核调用</li>
+<li>多对多<br>缺点：复杂</li>
 </ol>
-<h3 id="二、易混淆概率对比"><a href="#二、易混淆概率对比" class="headerlink" title="二、易混淆概率对比"></a>二、易混淆概率对比</h3><h4 id="随机变量vs随机变量取值"><a href="#随机变量vs随机变量取值" class="headerlink" title="随机变量vs随机变量取值"></a>随机变量vs随机变量取值</h4><h4 id="PMF、PDF、CDF"><a href="#PMF、PDF、CDF" class="headerlink" title="PMF、PDF、CDF"></a>PMF、PDF、CDF</h4><ol>
-<li>概念解释</li>
-</ol>
-<ul>
-<li>PMF（probability mass function）概率质量函数：在概率论中，概率质量函数是<code>离散随机变量</code>在各特定取值上的概率。</li>
-<li>PDF（probability density function）概率密度函数：<code>连续型随机变量</code>的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。</li>
-<li>CDF（cumulative distribution function）累积分布函数：又叫分布函数，是<code>PDF</code>的积分/<code>PMF</code>的累加，能完整描述一个实随机变量X的概率分布。</li>
-</ul>
-<ol start="2">
-<li>数学表示<br>1) PMF<br>$$ p_X(x)=P(X=x) $$<br>2) PDF<br>$$ P(a \leqslant X \leqslant b)=\int_{a}^{b}f_X(x)dx $$<br>3) CDF</li>
-</ol>
-<ul>
-<li>对于离散型随机变量</li>
-<li>对于连续型随机变量<br>$$ F_X(x)=P(X \leqslant x)=\int_{-\infty }^{x}f_X(x)dx $$</li>
-</ul>
 
             </div>
             <hr/>
@@ -498,7 +488,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/">https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/</a>
+                    <a href="https://hhhoscar.github.io/2021/06/01/java-bing-fa-1-xian-cheng-mo-xing/">https://hhhoscar.github.io/2021/06/01/java-bing-fa-1-xian-cheng-mo-xing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -536,8 +526,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                    <span class="chip bg-color">概率论</span>
+                                <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                                    <span class="chip bg-color">Java并发</span>
                                 </a>
                             
                         </div>
@@ -688,9 +678,60 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/06/01/java-bing-fa-1-xian-cheng-mo-xing/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Java并发1-线程模型">
+                        
+                        <span class="card-title">Java并发1-线程模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            摘要
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">Java并发</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2021/05/07/jvm-ji-ben-jia-gou/">
                     <div class="card-image">
@@ -708,9 +749,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -728,59 +769,6 @@
                     
                     <a href="/tags/JVM/">
                         <span class="chip bg-color">JVM</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/08/hexo-da-jian-bo-ke-ji-ben-yong-fa/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="hexo搭建博客基本用法">
-                        
-                        <span class="card-title">hexo搭建博客基本用法</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            本文对hexo搭建博客的基本用法做一个记录
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    工具
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                    <a href="/tags/Github/">
-                        <span class="chip bg-color">Github</span>
                     </a>
                     
                 </div>
@@ -955,13 +943,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 

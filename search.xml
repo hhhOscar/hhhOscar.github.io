@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Java并发1-线程模型</title>
+      <link href="/2021/06/01/java-bing-fa-1-xian-cheng-mo-xing/"/>
+      <url>/2021/06/01/java-bing-fa-1-xian-cheng-mo-xing/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Java线程模型"><a href="#Java线程模型" class="headerlink" title="Java线程模型"></a>Java线程模型</h2><h3 id="什么是线程模型？为什么要有线程模型？"><a href="#什么是线程模型？为什么要有线程模型？" class="headerlink" title="什么是线程模型？为什么要有线程模型？"></a>什么是线程模型？为什么要有线程模型？</h3><blockquote><p>什么是线程模型</p></blockquote><p>Java字节码运行在JVM中，通过Java字节码创建的线程，我们叫它<code>JVM线程</code><br>JVM运行在各种操作系统上，当JVM想进行线程创建、线程回收的操作，需要进行操作系统级的系统调用，在操作系统中创建、回收真正的线程。这种“真正的线程”我们称为<code>操作系统线程</code><br>可以看出，<code>JVM线程</code>和<code>操作系统线程</code>存在着某种映射关系。这种映射关系（两种线程之间的规范和协议）叫做<code>线程模型</code></p><blockquote><p>为什么要有线程模型</p></blockquote><p>没有线程模型，难道你要手动调用操作系统的接口，直接对<code>操作系统线程</code>操作吗？<br>答案是：<code>抽象！</code><br>JVM为各种操作系统的原生线程进行了高级抽象，提供了统一的<code>JVM线程接口</code>给开发者使用，它不香吗？<br>之所以要学，是因为我们要知其然，还要知其所以然~</p><h3 id="线程模型分类"><a href="#线程模型分类" class="headerlink" title="线程模型分类"></a>线程模型分类</h3><ol><li>一对一<br>用户线程和内核线程一一对应<br>优点：简单、易用<br>缺点：内核创建线程是有上限的，进而影响用户线程的高并发。</li><li>多对一<br>多个用户线程对应一个内核线程<br>优点：扩展了用户线程的上限<br>缺点：一个用户线程进行系统调用并阻塞，会导致内核线程组内的所有线程都无法进行内核调用</li><li>多对多<br>缺点：复杂</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java并发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM基本架构</title>
+      <link href="/2021/05/07/jvm-ji-ben-jia-gou/"/>
+      <url>/2021/05/07/jvm-ji-ben-jia-gou/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Java-Virtual-Machine-JVM-基本架构"><a href="#Java-Virtual-Machine-JVM-基本架构" class="headerlink" title="Java Virtual Machine(JVM)基本架构"></a>Java Virtual Machine(JVM)基本架构</h2><p>JVM包含三个基本部分：</p><ol><li>Class Loader</li><li>Runtime Memory（Runtime Data Area）</li><li>Execution Engine<br>下面分别介绍三个部分。</li></ol><h3 id="Class-Loader"><a href="#Class-Loader" class="headerlink" title="Class Loader"></a>Class Loader</h3><p>在类加载过程中，分成三个阶段：加载、链接、初始化<br><strong>加载（Loading）</strong><br>拿到一个类/接口的二进制表示（即字节码），Loading过程生成原本的类/接口。<br>Java中有三个内置的类加载器：</p><ul><li><code>Bootstrap Class Loader</code>: 这个是<code>root</code>类加载器，是<code>Extension Class Loader</code>的父类。<code>Bootstrap Class Loader</code>加载的是<code>Java</code>的标准包（<code>standard Java packages</code>），例如<code>java.lang</code>，<code>java.net</code>，<code>java.util</code>，<code>java.io</code>…<br>这些package在<code>rt.jar</code>文件中，还有一些核心库在<code>$JAVA_HOME/jre/lib</code>文件夹中。</li><li><code>Extension Class Loader</code>: 这个类加载器是<code>Bootstrap Class Loader</code>的子类，又是<code>Application Class Loader</code>的父类。<code>Extension Class Loader</code>加载的是位于<code>$JAVA_HOME/jre/lib/ext</code>文件夹中的，标准Java库的扩展。</li><li><code>Application Class Loader</code>: 最后一个类加载器<code>Application Class Loader</code>，是<code>Extension Class Loader</code>的子类，它加载<code>classpath</code>中的文件，而<code>classpath</code>默认设置为当前应用程序的文件夹。可以用命令行<code>-classpath</code>或<code>-cp</code>来修改<code>classpath</code>。<br>JVM使用<code>ClassLoader.loadClass()</code>方法来将类加载进内存。<br>JVM优先选择父类的类加载器（即：<code>Bootstrap Class Loader &gt; Extension Class Loader &gt; Application Class Loader</code>）当父类加载器找不到想要的类时，才会委托子类加载器去找。</li></ul><p><strong>链接（Linking）</strong><br>当一个类被加载进内存，紧接着进行链接操作。</p><ol><li>验证（Verification）<br>验证<code>.class</code>文件的结构正确性。通常指的是Java代码和虚拟机的Java版本是否匹配。</li><li>准备（Preparation）<br>在准备阶段，JVM将类/接口中用<code>static</code>修饰的类变量用默认值初始化。<br>例如下面的代码：<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>JVM在准备阶段会为类变量<code>enabled</code>分配内存，并用<code>boolean</code>类型的默认值<code>false</code>进行初始化操作。</li><li>解析（Resolution）<br>在此阶段，将<code>符号引用</code>替换为在<code>运行时常量池</code>中存在的<code>直接引用</code>。</li></ol><p><strong>初始化（Initialization）</strong><br>初始化阶段涉及到执行类/接口的初始化方法（<code>&lt;clinit&gt;</code>）。包括调用类的构造器方法、执行static block、为所有static变量赋值。<br>这是类加载的最后一个阶段。<br>例如上面的例子：</p><pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre><p>类变量<code>enabled</code>在准备阶段被设置成<code>boolean</code>类型的默认值<code>false</code>，直到初始化阶段，才被赋予真正的值<code>true</code>。</p><h3 id="Runtime-Data-Area"><a href="#Runtime-Data-Area" class="headerlink" title="Runtime Data Area"></a>Runtime Data Area</h3><ol><li>方法区（Method Area）<br>存储所有类级别的数据，例如：运行时常量池、</li><li>堆区（Heap Area）</li><li>虚拟机栈（Stack Area）</li><li>本地方法栈（Native Method Stacks）</li><li>PC寄存器（Program Counter Registers）</li></ol><h3 id="Execution-Engine"><a href="#Execution-Engine" class="headerlink" title="Execution Engine"></a>Execution Engine</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JVM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>概率论总结</title>
       <link href="/2020/07/05/gai-lu-lun-zong-jie/"/>
       <url>/2020/07/05/gai-lu-lun-zong-jie/</url>

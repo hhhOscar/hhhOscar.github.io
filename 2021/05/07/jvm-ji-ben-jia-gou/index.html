@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="概率论总结, 小周的博客">
+    <meta name="keywords" content="JVM基本架构, 小周的博客">
     <meta name="description" content="想要不断进步的普通人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>概率论总结 | 小周的博客</title>
+    <title>JVM基本架构 | 小周的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -264,12 +264,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">概率论总结</h1>
+                    <h1 class="description center-align post-title">JVM基本架构</h1>
                 </div>
             </div>
         </div>
@@ -394,8 +394,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                <span class="chip bg-color">概率论</span>
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
                             </a>
                         
                     </div>
@@ -406,8 +406,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
-                                数学
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-07-05
+                    2021-05-07
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-06
+                    2021-05-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    481
+                    656
                 </div>
                 
 
@@ -450,30 +450,36 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<h2 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h2></blockquote>
-<h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><ol>
-<li>随机现象：在一定的条件下，并不总是出现相同结果的现象称为随机现象。</li>
-<li>随机试验：对在相同条件下可以重复的随机现象的观察、记录、试验称为随机试验。也有很多随机现象是不可重复的（例如：某场足球赛的胜负是无法重复的）。概率论与数理统计主要研究能大量重复的随机现象，但后者同样重要。</li>
-<li>样本空间与样本点：随机现象的一切可能出现的基本结果组成的集合称为样本空间，记为 $ \Omega=\{\omega\} $，其中 $ \omega $ 为样本点，表示可能出现的基本结果。</li>
-<li>随机变量：给定一个随机现象和它对应的样本空间，一个随机变量X给每个基本结果（样本点）赋予一个数值的值。Methematically,a random variable is a real-valued function of the experimental outcome.</li>
+                <h2 id="Java-Virtual-Machine-JVM-基本架构"><a href="#Java-Virtual-Machine-JVM-基本架构" class="headerlink" title="Java Virtual Machine(JVM)基本架构"></a>Java Virtual Machine(JVM)基本架构</h2><p>JVM包含三个基本部分：</p>
+<ol>
+<li>Class Loader</li>
+<li>Runtime Memory（Runtime Data Area）</li>
+<li>Execution Engine<br>下面分别介绍三个部分。</li>
 </ol>
-<h3 id="二、易混淆概率对比"><a href="#二、易混淆概率对比" class="headerlink" title="二、易混淆概率对比"></a>二、易混淆概率对比</h3><h4 id="随机变量vs随机变量取值"><a href="#随机变量vs随机变量取值" class="headerlink" title="随机变量vs随机变量取值"></a>随机变量vs随机变量取值</h4><h4 id="PMF、PDF、CDF"><a href="#PMF、PDF、CDF" class="headerlink" title="PMF、PDF、CDF"></a>PMF、PDF、CDF</h4><ol>
-<li>概念解释</li>
-</ol>
+<h3 id="Class-Loader"><a href="#Class-Loader" class="headerlink" title="Class Loader"></a>Class Loader</h3><p>在类加载过程中，分成三个阶段：加载、链接、初始化<br><strong>加载（Loading）</strong><br>拿到一个类/接口的二进制表示（即字节码），Loading过程生成原本的类/接口。<br>Java中有三个内置的类加载器：</p>
 <ul>
-<li>PMF（probability mass function）概率质量函数：在概率论中，概率质量函数是<code>离散随机变量</code>在各特定取值上的概率。</li>
-<li>PDF（probability density function）概率密度函数：<code>连续型随机变量</code>的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。</li>
-<li>CDF（cumulative distribution function）累积分布函数：又叫分布函数，是<code>PDF</code>的积分/<code>PMF</code>的累加，能完整描述一个实随机变量X的概率分布。</li>
+<li><code>Bootstrap Class Loader</code>: 这个是<code>root</code>类加载器，是<code>Extension Class Loader</code>的父类。<code>Bootstrap Class Loader</code>加载的是<code>Java</code>的标准包（<code>standard Java packages</code>），例如<code>java.lang</code>，<code>java.net</code>，<code>java.util</code>，<code>java.io</code>…<br>这些package在<code>rt.jar</code>文件中，还有一些核心库在<code>$JAVA_HOME/jre/lib</code>文件夹中。</li>
+<li><code>Extension Class Loader</code>: 这个类加载器是<code>Bootstrap Class Loader</code>的子类，又是<code>Application Class Loader</code>的父类。<code>Extension Class Loader</code>加载的是位于<code>$JAVA_HOME/jre/lib/ext</code>文件夹中的，标准Java库的扩展。</li>
+<li><code>Application Class Loader</code>: 最后一个类加载器<code>Application Class Loader</code>，是<code>Extension Class Loader</code>的子类，它加载<code>classpath</code>中的文件，而<code>classpath</code>默认设置为当前应用程序的文件夹。可以用命令行<code>-classpath</code>或<code>-cp</code>来修改<code>classpath</code>。<br>JVM使用<code>ClassLoader.loadClass()</code>方法来将类加载进内存。<br>JVM优先选择父类的类加载器（即：<code>Bootstrap Class Loader &gt; Extension Class Loader &gt; Application Class Loader</code>）当父类加载器找不到想要的类时，才会委托子类加载器去找。</li>
 </ul>
-<ol start="2">
-<li>数学表示<br>1) PMF<br>$$ p_X(x)=P(X=x) $$<br>2) PDF<br>$$ P(a \leqslant X \leqslant b)=\int_{a}^{b}f_X(x)dx $$<br>3) CDF</li>
+<p><strong>链接（Linking）</strong><br>当一个类被加载进内存，紧接着进行链接操作。</p>
+<ol>
+<li>验证（Verification）<br>验证<code>.class</code>文件的结构正确性。通常指的是Java代码和虚拟机的Java版本是否匹配。</li>
+<li>准备（Preparation）<br>在准备阶段，JVM将类/接口中用<code>static</code>修饰的类变量用默认值初始化。<br>例如下面的代码：<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+JVM在准备阶段会为类变量<code>enabled</code>分配内存，并用<code>boolean</code>类型的默认值<code>false</code>进行初始化操作。</li>
+<li>解析（Resolution）<br>在此阶段，将<code>符号引用</code>替换为在<code>运行时常量池</code>中存在的<code>直接引用</code>。</li>
 </ol>
-<ul>
-<li>对于离散型随机变量</li>
-<li>对于连续型随机变量<br>$$ F_X(x)=P(X \leqslant x)=\int_{-\infty }^{x}f_X(x)dx $$</li>
-</ul>
-
+<p><strong>初始化（Initialization）</strong><br>初始化阶段涉及到执行类/接口的初始化方法（<code>&lt;clinit&gt;</code>）。包括调用类的构造器方法、执行static block、为所有static变量赋值。<br>这是类加载的最后一个阶段。<br>例如上面的例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<p>类变量<code>enabled</code>在准备阶段被设置成<code>boolean</code>类型的默认值<code>false</code>，直到初始化阶段，才被赋予真正的值<code>true</code>。</p>
+<h3 id="Runtime-Data-Area"><a href="#Runtime-Data-Area" class="headerlink" title="Runtime Data Area"></a>Runtime Data Area</h3><ol>
+<li>方法区（Method Area）<br>存储所有类级别的数据，例如：运行时常量池、</li>
+<li>堆区（Heap Area）</li>
+<li>虚拟机栈（Stack Area）</li>
+<li>本地方法栈（Native Method Stacks）</li>
+<li>PC寄存器（Program Counter Registers）</li>
+</ol>
+<h3 id="Execution-Engine"><a href="#Execution-Engine" class="headerlink" title="Execution Engine"></a>Execution Engine</h3>
             </div>
             <hr/>
 
@@ -498,7 +504,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/">https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/</a>
+                    <a href="https://hhhoscar.github.io/2021/05/07/jvm-ji-ben-jia-gou/">https://hhhoscar.github.io/2021/05/07/jvm-ji-ben-jia-gou/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -536,8 +542,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                    <span class="chip bg-color">概率论</span>
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
                                 </a>
                             
                         </div>
@@ -692,24 +698,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/07/jvm-ji-ben-jia-gou/">
+                <a href="/2021/06/01/java-bing-fa-1-xian-cheng-mo-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="JVM基本架构">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Java并发1-线程模型">
                         
-                        <span class="card-title">JVM基本架构</span>
+                        <span class="card-title">Java并发1-线程模型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            对Java JVM架构的基本认识
+                            摘要
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-07
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-01
                         </span>
                         <span class="publish-author">
                             
@@ -726,8 +732,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
+                    <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">Java并发</span>
                     </a>
                     
                 </div>
@@ -741,31 +747,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/08/hexo-da-jian-bo-ke-ji-ben-yong-fa/">
+                <a href="/2020/07/05/gai-lu-lun-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="hexo搭建博客基本用法">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="概率论总结">
                         
-                        <span class="card-title">hexo搭建博客基本用法</span>
+                        <span class="card-title">概率论总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文对hexo搭建博客的基本用法做一个记录
+                            对概率论学习的一个总结
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    工具
+                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
+                                    数学
                                 </a>
                             
                             
@@ -775,12 +781,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                    <a href="/tags/Github/">
-                        <span class="chip bg-color">Github</span>
+                    <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
+                        <span class="chip bg-color">概率论</span>
                     </a>
                     
                 </div>
@@ -955,13 +957,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 
