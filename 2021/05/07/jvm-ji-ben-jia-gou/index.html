@@ -426,14 +426,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-07
+                    2021-08-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    656
+                    2.2k
                 </div>
                 
 
@@ -450,36 +450,116 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Java-Virtual-Machine-JVM-基本架构"><a href="#Java-Virtual-Machine-JVM-基本架构" class="headerlink" title="Java Virtual Machine(JVM)基本架构"></a>Java Virtual Machine(JVM)基本架构</h2><p>JVM包含三个基本部分：</p>
+                <h1 id="Java-Virtual-Machine-JVM-基本架构"><a href="#Java-Virtual-Machine-JVM-基本架构" class="headerlink" title="Java Virtual Machine(JVM)基本架构"></a>Java Virtual Machine(JVM)基本架构</h1><p>JVM包含三个基本部分：</p>
 <ol>
 <li>Class Loader</li>
 <li>Runtime Memory（Runtime Data Area）</li>
-<li>Execution Engine<br>下面分别介绍三个部分。</li>
+<li>Execution Engine</li>
 </ol>
-<h3 id="Class-Loader"><a href="#Class-Loader" class="headerlink" title="Class Loader"></a>Class Loader</h3><p>在类加载过程中，分成三个阶段：加载、链接、初始化<br><strong>加载（Loading）</strong><br>拿到一个类/接口的二进制表示（即字节码），Loading过程生成原本的类/接口。<br>Java中有三个内置的类加载器：</p>
+<p>下面分别介绍三个部分。</p>
+<h2 id="Class-Loader"><a href="#Class-Loader" class="headerlink" title="Class Loader"></a>Class Loader</h2><p>在类加载过程中，分成三个阶段：加载、链接、初始化</p>
+<h3 id="加载（Loading）"><a href="#加载（Loading）" class="headerlink" title="加载（Loading）"></a><strong>加载（Loading）</strong></h3><p>拿到一个类/接口的二进制表示（即字节码），Loading过程生成原本的类/接口，将class结构写入方法区。（未链接还不能使用）<br>Java中有三个内置的类加载器：</p>
 <ul>
 <li><code>Bootstrap Class Loader</code>: 这个是<code>root</code>类加载器，是<code>Extension Class Loader</code>的父类。<code>Bootstrap Class Loader</code>加载的是<code>Java</code>的标准包（<code>standard Java packages</code>），例如<code>java.lang</code>，<code>java.net</code>，<code>java.util</code>，<code>java.io</code>…<br>这些package在<code>rt.jar</code>文件中，还有一些核心库在<code>$JAVA_HOME/jre/lib</code>文件夹中。</li>
 <li><code>Extension Class Loader</code>: 这个类加载器是<code>Bootstrap Class Loader</code>的子类，又是<code>Application Class Loader</code>的父类。<code>Extension Class Loader</code>加载的是位于<code>$JAVA_HOME/jre/lib/ext</code>文件夹中的，标准Java库的扩展。</li>
 <li><code>Application Class Loader</code>: 最后一个类加载器<code>Application Class Loader</code>，是<code>Extension Class Loader</code>的子类，它加载<code>classpath</code>中的文件，而<code>classpath</code>默认设置为当前应用程序的文件夹。可以用命令行<code>-classpath</code>或<code>-cp</code>来修改<code>classpath</code>。<br>JVM使用<code>ClassLoader.loadClass()</code>方法来将类加载进内存。<br>JVM优先选择父类的类加载器（即：<code>Bootstrap Class Loader &gt; Extension Class Loader &gt; Application Class Loader</code>）当父类加载器找不到想要的类时，才会委托子类加载器去找。</li>
 </ul>
-<p><strong>链接（Linking）</strong><br>当一个类被加载进内存，紧接着进行链接操作。</p>
+<h3 id="链接（Linking）"><a href="#链接（Linking）" class="headerlink" title="链接（Linking）"></a><strong>链接（Linking）</strong></h3><p>当一个类被加载进内存，紧接着进行链接操作。链接操作有分为三个步骤。</p>
+<h4 id="验证（Verification）"><a href="#验证（Verification）" class="headerlink" title="验证（Verification）"></a>验证（Verification）</h4><p>验证<code>.class</code>文件的结构正确性。通常指的是Java代码和虚拟机的Java版本是否匹配。</p>
+<h4 id="准备（Preparation）"><a href="#准备（Preparation）" class="headerlink" title="准备（Preparation）"></a>准备（Preparation）</h4><p>在准备阶段，主要做了两件小事：</p>
 <ol>
-<li>验证（Verification）<br>验证<code>.class</code>文件的结构正确性。通常指的是Java代码和虚拟机的Java版本是否匹配。</li>
-<li>准备（Preparation）<br>在准备阶段，JVM将类/接口中用<code>static</code>修饰的类变量用默认值初始化。<br>例如下面的代码：<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
-JVM在准备阶段会为类变量<code>enabled</code>分配内存，并用<code>boolean</code>类型的默认值<code>false</code>进行初始化操作。</li>
-<li>解析（Resolution）<br>在此阶段，将<code>符号引用</code>替换为在<code>运行时常量池</code>中存在的<code>直接引用</code>。</li>
+<li>JVM为类/接口中用<code>static</code>修饰的<strong>类变量分配内存</strong>，并用默认值初始化。<br>例如下面的代码：</li>
 </ol>
-<p><strong>初始化（Initialization）</strong><br>初始化阶段涉及到执行类/接口的初始化方法（<code>&lt;clinit&gt;</code>）。包括调用类的构造器方法、执行static block、为所有static变量赋值。<br>这是类加载的最后一个阶段。<br>例如上面的例子：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
-<p>类变量<code>enabled</code>在准备阶段被设置成<code>boolean</code>类型的默认值<code>false</code>，直到初始化阶段，才被赋予真正的值<code>true</code>。</p>
-<h3 id="Runtime-Data-Area"><a href="#Runtime-Data-Area" class="headerlink" title="Runtime Data Area"></a>Runtime Data Area</h3><ol>
+<p>​    JVM在准备阶段会为类变量<code>enabled</code>分配内存，并用<code>boolean</code>类型的默认值<code>false</code>进行初始化操作。</p>
+<ol start="2">
+<li><p>构造与该类相关联的<strong>方法表</strong>。</p>
+<p>这个数据结构，便是 Java 虚拟机实现<code>动态绑定</code>的关键所在。下面我将以 invokevirtual 所使用的虚方法表（virtual method table，vtable）为例介绍方法表的用法。invokeinterface 所使用的接口方法表（interface method table，itable）稍微复杂些，但是原理其实是类似的。</p>
+<p>方法表本质上是一个数组，每个数组元素指向一个当前类及其祖先类中<code>非私有</code>、<code>非final</code>的实例方法（<code>非static</code>）。</p>
+<p>这些方法可能是具体的、可执行的方法，也可能是没有相应字节码的抽象方法。方法表满足两个特质：</p>
+<ul>
+<li><p>其一，子类方法表中包含<strong>父类方法表</strong>中的所有方法；（注意不是父类中的所有方法哦）</p>
+<p>即：包含关系</p>
+</li>
+<li><p>其二，子类方法在方法表中的索引值，与它<strong>所重写的父类方法</strong>的索引值相同。</p>
+<p>即：替换关系</p>
+</li>
+</ul>
+<p>我们知道，方法调用指令中的符号引用会在执行之前解析成实际引用。</p>
+<p>对于静态绑定的方法调用而言，实际引用将指向具体的目标方法。对于动态绑定的方法调用而言，实际引用则是方法表的索引值（实际上并不仅是索引值）。在执行过程中，Java 虚拟机将获取调用者的实际类型，并在该实际类型的虚方法表中，根据索引值获得目标方法。这个过程便是动态绑定。</p>
+<p>让我们来看一个例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Passenger</span> <span class="token punctuation">{</span>
+  <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">passThroughImmigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">ForeignerPassenger</span> <span class="token keyword">extends</span> <span class="token class-name">Passenger</span> <span class="token punctuation">{</span>
+   <span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">void</span> <span class="token function">passThroughImmigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">/* 进外国人通道 */</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">ChinesePassenger</span> <span class="token keyword">extends</span> <span class="token class-name">Passenger</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">void</span> <span class="token function">passThroughImmigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">/* 进中国人通道 */</span> <span class="token punctuation">}</span>
+  <span class="token keyword">void</span> <span class="token function">visitDutyFreeShops</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">/* 逛免税店 */</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+Passenger passenger <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment" spellcheck="true">// 多态，选择某个子类作为对象的实际类型</span>
+passenger<span class="token punctuation">.</span><span class="token function">passThroughImmigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 根据调用者passenger的实际类型，并在该实际类型的虚方法表中，根据索引值获得目标方法</span></code></pre>
+<img src="C:\Users\提高知识水平\AppData\Roaming\Typora\typora-user-images\image-20210813231035497.png" alt="image-20210813231035497" style="zoom: 80%;" />
+
+<p>在我们的例子中，Passenger 类的方法表包括两个方法：toString() 和 passThroughImmigration()，它们分别对应 0 号和 1 号。之所以方法表调换了 toString() 方法和 passThroughImmigration() 方法的位置，是因为 toString() 方法的索引值需要与 Object 类中同名方法的索引值一致。为了保持简洁，这里我就不考虑 Object 类中的其他方法。</p>
+<p>ForeignerPassenger 的方法表同样有两行。其中，0 号方法指向继承而来的 Passenger 类的 toString() 方法。1 号方法则指向自己重写的 passThroughImmigration() 方法。</p>
+<p>ChinesePassenger 的方法表则包括三个方法，除了继承而来的 Passenger 类的 toString() 方法，自己重写的 passThroughImmigration() 方法之外，还包括独有的 visitDutyFreeShops 方法。</p>
+<pre class=" language-java"><code class="language-java">Passenger passenger <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+passenger<span class="token punctuation">.</span><span class="token function">passThroughImmigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>这里，JVM的工作可以想象为导航员。每当来了一个乘客需要出境，导航员会先问是中国人还是外国人（获取动态类型），然后翻出中国人 / 外国人对应的小册子（获取动态类型的方法表），小册子的第 1 页便写着应该如何办理手续（用 1 作为索引来查找方法表所对应的目标方法）。</p>
+</li>
+</ol>
+<h4 id="解析（Resolution）"><a href="#解析（Resolution）" class="headerlink" title="解析（Resolution）"></a>解析（Resolution）</h4><p>在此阶段，将<code>符号引用</code>替换为在<code>运行时常量池</code>中存在的<code>直接引用</code>。</p>
+<p>如果符号引用指向一个未被加载的类，或者未被加载类的字段或方法，那么解析将触发这个类的加载（但未必触发这个类的链接以及初始化。）</p>
+<p>此外，Java 虚拟机规范并没有要求在链接过程中完成解析。它仅规定了：如果某些字节码使用了符号引用，那么在执行这些字节码之前，需要完成对这些符号引用的解析。</p>
+<h3 id="初始化（Initialization）"><a href="#初始化（Initialization）" class="headerlink" title="初始化（Initialization）"></a><strong>初始化（Initialization）</strong></h3><p>在 Java 代码中，如果要初始化一个静态字段，我们可以在声明时直接赋值，也可以在静态代码块中对其赋值。</p>
+<ul>
+<li><p>如果直接赋值的静态字段被 final 所修饰，并且它的类型是基本类型或字符串时，那么该字段便会被 Java 编译器标记成常量值（ConstantValue），其初始化直接由 Java 虚拟机完成。</p>
+</li>
+<li><p>除此之外的直接赋值操作，以及所有静态代码块中的代码，则会被 Java 编译器置于同一方法中，并把它命名为 &lt; clinit &gt;。随后执行类/接口的初始化方法（<code>&lt;clinit&gt;</code>）</p>
+</li>
+</ul>
+<p>类加载的最后一步是初始化，便是为标记为常量值的字段赋值，以及执行 &lt; clinit &gt; 方法的过程。Java 虚拟机会通过加锁来确保类的 &lt; clinit &gt; 方法仅被执行一次，即在多线程情况下是安全的。<br>例如上面的例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<p>类变量<code>enabled</code>在准备阶段被设置成<code>boolean</code>类型的默认值<code>false</code>，直到初始化阶段，才被标记成常量值，并由JVM直接赋予真正的值<code>true</code>。</p>
+<p>只有当初始化完成之后，类才正式成为可执行的状态。那么，类的初始化何时会被触发呢？JVM 规范枚举了下述多种触发情况：</p>
+<ol>
+<li>当虚拟机启动时，初始化用户指定的主类；</li>
+<li>当遇到用以新建目标类实例的 new 指令时，初始化 new 指令的目标类；</li>
+<li>当遇到调用静态方法的指令时，初始化该静态方法所在的类；</li>
+<li>当遇到访问静态字段的指令时，初始化该静态字段所在的类；</li>
+<li>子类的初始化会触发父类的初始化；</li>
+<li>如果一个接口定义了 default 方法，那么直接实现或者间接实现该接口的类的初始化，会触发该接口的初始化；</li>
+<li>使用反射 API 对某个类进行反射调用时，初始化这个类；</li>
+<li>当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</li>
+</ol>
+<p>下面代码是情况4的一个例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">LazyHolder</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> Singleton INSTANCE <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> LazyHolder<span class="token punctuation">.</span>INSTANCE<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>这段代码是著名的单例延迟初始化例子:</p>
+<p>只有当调用 Singleton.getInstance 时，程序才会访问 LazyHolder.INSTANCE，才会触发对 LazyHolder 的初始化（对应第 4 种情况），继而新建一个 Singleton 的实例。</p>
+<p>由于类初始化是线程安全的，并且仅被执行一次，因此程序可以确保多线程环境下有且仅有一个 Singleton 实例。</p>
+<h2 id="Runtime-Data-Area"><a href="#Runtime-Data-Area" class="headerlink" title="Runtime Data Area"></a>Runtime Data Area</h2><ol>
 <li>方法区（Method Area）<br>存储所有类级别的数据，例如：运行时常量池、</li>
 <li>堆区（Heap Area）</li>
 <li>虚拟机栈（Stack Area）</li>
 <li>本地方法栈（Native Method Stacks）</li>
 <li>PC寄存器（Program Counter Registers）</li>
 </ol>
-<h3 id="Execution-Engine"><a href="#Execution-Engine" class="headerlink" title="Execution Engine"></a>Execution Engine</h3>
+<h2 id="Execution-Engine"><a href="#Execution-Engine" class="headerlink" title="Execution Engine"></a>Execution Engine</h2>
             </div>
             <hr/>
 
@@ -972,7 +1052,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">2.4k</span>&nbsp;字
+                class="white-color">6.5k</span>&nbsp;字
             
             
             

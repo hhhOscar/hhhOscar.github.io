@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="概率论总结, 小周的博客">
+    <meta name="keywords" content="Java并发（一）线程安全与共享资源, 小周的博客">
     <meta name="description" content="想要不断进步的普通人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>概率论总结 | 小周的博客</title>
+    <title>Java并发（一）线程安全与共享资源 | 小周的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -264,12 +264,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">概率论总结</h1>
+                    <h1 class="description center-align post-title">Java并发（一）线程安全与共享资源</h1>
                 </div>
             </div>
         </div>
@@ -394,8 +394,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                <span class="chip bg-color">概率论</span>
+                            <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                                <span class="chip bg-color">Java并发</span>
                             </a>
                         
                     </div>
@@ -406,8 +406,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
-                                数学
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-07-05
+                    2021-07-06
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-06
+                    2021-07-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    481
+                    733
                 </div>
                 
 
@@ -450,29 +450,49 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<h2 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h2></blockquote>
-<h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><ol>
-<li>随机现象：在一定的条件下，并不总是出现相同结果的现象称为随机现象。</li>
-<li>随机试验：对在相同条件下可以重复的随机现象的观察、记录、试验称为随机试验。也有很多随机现象是不可重复的（例如：某场足球赛的胜负是无法重复的）。概率论与数理统计主要研究能大量重复的随机现象，但后者同样重要。</li>
-<li>样本空间与样本点：随机现象的一切可能出现的基本结果组成的集合称为样本空间，记为 $ \Omega=\{\omega\} $，其中 $ \omega $ 为样本点，表示可能出现的基本结果。</li>
-<li>随机变量：给定一个随机现象和它对应的样本空间，一个随机变量X给每个基本结果（样本点）赋予一个数值的值。Methematically,a random variable is a real-valued function of the experimental outcome.</li>
-</ol>
-<h3 id="二、易混淆概率对比"><a href="#二、易混淆概率对比" class="headerlink" title="二、易混淆概率对比"></a>二、易混淆概率对比</h3><h4 id="随机变量vs随机变量取值"><a href="#随机变量vs随机变量取值" class="headerlink" title="随机变量vs随机变量取值"></a>随机变量vs随机变量取值</h4><h4 id="PMF、PDF、CDF"><a href="#PMF、PDF、CDF" class="headerlink" title="PMF、PDF、CDF"></a>PMF、PDF、CDF</h4><ol>
-<li>概念解释</li>
-</ol>
-<ul>
-<li>PMF（probability mass function）概率质量函数：在概率论中，概率质量函数是<code>离散随机变量</code>在各特定取值上的概率。</li>
-<li>PDF（probability density function）概率密度函数：<code>连续型随机变量</code>的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。</li>
-<li>CDF（cumulative distribution function）累积分布函数：又叫分布函数，是<code>PDF</code>的积分/<code>PMF</code>的累加，能完整描述一个实随机变量X的概率分布。</li>
-</ul>
-<ol start="2">
-<li>数学表示<br>1) PMF<br>$$ p_X(x)=P(X=x) $$<br>2) PDF<br>$$ P(a \leqslant X \leqslant b)=\int_{a}^{b}f_X(x)dx $$<br>3) CDF</li>
-</ol>
-<ul>
-<li>对于离散型随机变量</li>
-<li>对于连续型随机变量<br>$$ F_X(x)=P(X \leqslant x)=\int_{-\infty }^{x}f_X(x)dx $$</li>
-</ul>
+                <h1 id="Java并发（一）线程安全与共享资源"><a href="#Java并发（一）线程安全与共享资源" class="headerlink" title="Java并发（一）线程安全与共享资源"></a>Java并发（一）线程安全与共享资源</h1><p>​    能够安全的同时被多个线程同时调用的代码叫做<code>线程安全</code>。一段代码是<code>线程安全</code>的，等价于这段代码不包含<code>race conditions</code>（竞争条件）。而竞争条件只可能发生在多个线程同时更新<code>共享资源</code>的时候。因此为了我们的<code>线程安全</code>，很有必要知道线程在执行的时候共享了哪些资源。</p>
+<h2 id="本地原始类型变量（local-primitive-variables）"><a href="#本地原始类型变量（local-primitive-variables）" class="headerlink" title="本地原始类型变量（local primitive variables）"></a>本地原始类型变量（local primitive variables）</h2><p>本地变量指定义在方法体内的变量。本地变量存储在每个线程私有的线程栈中，线程之间不会共享线程栈中的变量。这代表着所有的<code>本地原始类型变量</code>是线程安全的。下面是<code>本地原始类型变量</code>的例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">demoMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> threadSafeInt <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+    threadSafeInt<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="本地对象引用（local-object-references）"><a href="#本地对象引用（local-object-references）" class="headerlink" title="本地对象引用（local object references）"></a>本地对象引用（local object references）</h2><p>本地对象引用与本地原始类型变量略有不同。引用本身同样是存储在线程栈中，且不共享的。但引用的那个对象是存储在堆中的（所有的对象存储在堆中）因此如果有多个线程能够访问到这个对象，那么这个对象是共享资源，不是线程安全的。</p>
+<h2 id="对象成员变量（Member-variables-fields）"><a href="#对象成员变量（Member-variables-fields）" class="headerlink" title="对象成员变量（Member variables / fields）"></a>对象成员变量（Member variables / fields）</h2><p>对象的成员变量和对象一起存储在堆中。因此如果两个线程调用同一个对象实例的同一个方法（最常见的：使用同一个runnable实例【注：runnable实例指实现Runnable接口的实现类的实例】创建线程，两个线程调用start()方法后调用的是同一个对象实例的run()方法），而这个方法更新了对象的成员变量，那这个方法不是线程安全的。因为多个线程在同时更新<code>共享资源</code>。下面是一个不太常见的例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SharedMemberVariable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        NotThreadSafe shareInstance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NotThreadSafe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">MyRunnable</span><span class="token punctuation">(</span>shareInstance<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">MyRunnable</span><span class="token punctuation">(</span>shareInstance<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MyRunnable</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">{</span>
+    NotThreadSafe instance <span class="token operator">=</span> null<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">MyRunnable</span><span class="token punctuation">(</span>NotThreadSafe instance<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>instance <span class="token operator">=</span> instance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>instance<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"一段文本"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">NotThreadSafe</span> <span class="token punctuation">{</span>
+    StringBuilder sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// StringBuilder不是线程安全的</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span>String text<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<p>在这个例子中，虽然两个线程使用的是两个不同的Runnable实例，但在两个Runnable实例调用run()方法的时候，两个Runnable实例的this.instance指向的是堆中同一个NotThreadSafe对象：shareInstance。因此两个线程调用同一个对象实例(shareInstance)的同一个方法(add(String text)方法)，而这个方法更新了对象的成员变量(sb)，那这个方法不是线程安全的。</p>
+<p>然而，如果两个线程是在不同的实例上同时调用的add()方法，就不会构成竞争条件，比如这样稍微改动一下：</p>
+<pre class=" language-Java"><code class="language-Java">new Thread(new MyRunnable(new NotThreadSafe())).start();
+new Thread(new MyRunnable(new NotThreadSafe())).start();</code></pre>
 
             </div>
             <hr/>
@@ -498,7 +518,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/">https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/</a>
+                    <a href="https://hhhoscar.github.io/2021/07/06/java-bing-fa-yi-xian-cheng-an-quan-yu-gong-xiang-zi-yuan/">https://hhhoscar.github.io/2021/07/06/java-bing-fa-yi-xian-cheng-an-quan-yu-gong-xiang-zi-yuan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -536,8 +556,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                    <span class="chip bg-color">概率论</span>
+                                <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                                    <span class="chip bg-color">Java并发</span>
                                 </a>
                             
                         </div>
@@ -692,24 +712,25 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/07/jvm-ji-ben-jia-gou/">
+                <a href="/2021/08/16/java-dui-xiang-lei-xing-zhuan-huan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="JVM基本架构">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java对象类型转换">
                         
-                        <span class="card-title">JVM基本架构</span>
+                        <span class="card-title">Java对象类型转换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            对Java JVM架构的基本认识
+                            Java对象类型转换将一个类型强制转换成另一种类型的过程被称为类型装换。而Java中的对象类型转换，必须是有继承关系的对象，而不能是任意类型的对象。
+如果对不存在继承关系的对象进行强制类型转换，会抛出强制类型转换异常（java.lang.C
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-07
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-16
                         </span>
                         <span class="publish-author">
                             
@@ -726,8 +747,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
+                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java基础</span>
                     </a>
                     
                 </div>
@@ -741,31 +762,32 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/08/hexo-da-jian-bo-ke-ji-ben-yong-fa/">
+                <a href="/2021/06/23/java-nei-cun-mo-xing-jmm/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="hexo搭建博客基本用法">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Java 内存模型（JMM）">
                         
-                        <span class="card-title">hexo搭建博客基本用法</span>
+                        <span class="card-title">Java 内存模型（JMM）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文对hexo搭建博客的基本用法做一个记录
+                            Java并发（二）Java内存模型JVM（Java virtual machine）是对一个完整的计算机的建模，所以自然包括一个内存模型-也就是本文介绍的Java内存模型（Java memory medel）
+在JVM内部，Java内存模型
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    工具
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
                                 </a>
                             
                             
@@ -775,12 +797,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                    <a href="/tags/Github/">
-                        <span class="chip bg-color">Github</span>
+                    <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">Java并发</span>
                     </a>
                     
                 </div>
@@ -955,13 +973,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 

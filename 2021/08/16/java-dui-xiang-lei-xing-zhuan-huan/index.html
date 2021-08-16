@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="概率论总结, 小周的博客">
+    <meta name="keywords" content="Java对象类型转换, 小周的博客">
     <meta name="description" content="想要不断进步的普通人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>概率论总结 | 小周的博客</title>
+    <title>Java对象类型转换 | 小周的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -264,12 +264,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">概率论总结</h1>
+                    <h1 class="description center-align post-title">Java对象类型转换</h1>
                 </div>
             </div>
         </div>
@@ -394,8 +394,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                <span class="chip bg-color">概率论</span>
+                            <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">Java基础</span>
                             </a>
                         
                     </div>
@@ -406,8 +406,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
-                                数学
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-07-05
+                    2021-08-16
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-06
+                    2021-08-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    481
+                    601
                 </div>
                 
 
@@ -450,29 +450,82 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<h2 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h2></blockquote>
-<h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><ol>
-<li>随机现象：在一定的条件下，并不总是出现相同结果的现象称为随机现象。</li>
-<li>随机试验：对在相同条件下可以重复的随机现象的观察、记录、试验称为随机试验。也有很多随机现象是不可重复的（例如：某场足球赛的胜负是无法重复的）。概率论与数理统计主要研究能大量重复的随机现象，但后者同样重要。</li>
-<li>样本空间与样本点：随机现象的一切可能出现的基本结果组成的集合称为样本空间，记为 $ \Omega=\{\omega\} $，其中 $ \omega $ 为样本点，表示可能出现的基本结果。</li>
-<li>随机变量：给定一个随机现象和它对应的样本空间，一个随机变量X给每个基本结果（样本点）赋予一个数值的值。Methematically,a random variable is a real-valued function of the experimental outcome.</li>
+                <h1 id="Java对象类型转换"><a href="#Java对象类型转换" class="headerlink" title="Java对象类型转换"></a>Java对象类型转换</h1><p>将一个类型强制转换成另一种类型的过程被称为类型装换。而Java中的对象类型转换，必须是有继承关系的对象，而不能是任意类型的对象。</p>
+<p>如果对不存在继承关系的对象进行强制类型转换，会抛出强制类型转换异常（java.lang.ClassCastException）。</p>
+<p>Java 语言允许某个类型的引用变量引用子类的实例，而且可以对这个引用变量进行类型转换。Java 中引用类型之间的类型转换（前提是两个类是父子关系）主要有两种，分别是向上转型（upcasting）和向下转型（downcasting）。</p>
+<h2 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h2><p>父类引用指向子类对象为向上转型，语法格式如下：</p>
+<pre class=" language-java"><code class="language-java">FatherClass obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SonClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>其中，FatherClass 是父类名称或接口名称，SonClass 是子类名称。obj 是根据 SonClass 这个子类模板创建出的对象。</p>
+<p>向上转型就是把子类对象直接赋给父类引用，不用强制转换。使用起来有以下几点注意事项：</p>
+<ol>
+<li>使用向上转型可以调用父类类型中的所有成员方法，但不能调用子类类型中特有的成员方法。</li>
+<li>当出现子类重写的情况，最终运行效果看子类的具体实现。</li>
 </ol>
-<h3 id="二、易混淆概率对比"><a href="#二、易混淆概率对比" class="headerlink" title="二、易混淆概率对比"></a>二、易混淆概率对比</h3><h4 id="随机变量vs随机变量取值"><a href="#随机变量vs随机变量取值" class="headerlink" title="随机变量vs随机变量取值"></a>随机变量vs随机变量取值</h4><h4 id="PMF、PDF、CDF"><a href="#PMF、PDF、CDF" class="headerlink" title="PMF、PDF、CDF"></a>PMF、PDF、CDF</h4><ol>
-<li>概念解释</li>
-</ol>
+<h2 id="向下转型"><a href="#向下转型" class="headerlink" title="向下转型"></a>向下转型</h2><p>子类引用指向父类对象，称为向下转型，需要强制转换。</p>
+<p>强制向下转型有两种方式：</p>
 <ul>
-<li>PMF（probability mass function）概率质量函数：在概率论中，概率质量函数是<code>离散随机变量</code>在各特定取值上的概率。</li>
-<li>PDF（probability density function）概率密度函数：<code>连续型随机变量</code>的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。</li>
-<li>CDF（cumulative distribution function）累积分布函数：又叫分布函数，是<code>PDF</code>的积分/<code>PMF</code>的累加，能完整描述一个实随机变量X的概率分布。</li>
+<li><p>不安全的向下转型：如<code>Dog dog = (Dog) new Animal();</code>编译通过，但运行会抛出异常；</p>
+</li>
+<li><p>安全的向下转型：先向上转型，再向下转型，如:</p>
+<pre class=" language-java"><code class="language-java">Animal animal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+Dog dog <span class="token operator">=</span> <span class="token punctuation">(</span>Dog<span class="token punctuation">)</span> animal<span class="token punctuation">;</span></code></pre>
+</li>
 </ul>
-<ol start="2">
-<li>数学表示<br>1) PMF<br>$$ p_X(x)=P(X=x) $$<br>2) PDF<br>$$ P(a \leqslant X \leqslant b)=\int_{a}^{b}f_X(x)dx $$<br>3) CDF</li>
-</ol>
-<ul>
-<li>对于离散型随机变量</li>
-<li>对于连续型随机变量<br>$$ F_X(x)=P(X \leqslant x)=\int_{-\infty }^{x}f_X(x)dx $$</li>
-</ul>
+<p>这样做有什么意义呢？见下面示例：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Game</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">playGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"打开电脑"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Csgo</span> <span class="token keyword">extends</span> <span class="token class-name">Game</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">playGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">playGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"射击！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">LoL</span> <span class="token keyword">extends</span> <span class="token class-name">Game</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">playGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">playGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"补兵！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Player</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">playGame</span><span class="token punctuation">(</span>Game game<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">//通过instanceof来判断</span>
+        <span class="token comment" spellcheck="true">//参数为猫类对象的向上转型</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>game <span class="token keyword">instanceof</span> <span class="token class-name">Csgo</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Csgo csgo <span class="token operator">=</span> <span class="token punctuation">(</span>Csgo<span class="token punctuation">)</span> game<span class="token punctuation">;</span>
+            csgo<span class="token punctuation">.</span><span class="token function">playGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>game <span class="token keyword">instanceof</span> <span class="token class-name">LoL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            LoL lol <span class="token operator">=</span> <span class="token punctuation">(</span>LoL<span class="token punctuation">)</span> game<span class="token punctuation">;</span>
+            lol<span class="token punctuation">.</span><span class="token function">playGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Player player <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Player</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 传入不同的子类对象，在调用playGame时隐式的进行了向上转型</span>
+        player<span class="token punctuation">.</span><span class="token function">playGame</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Csgo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"*******************"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        player<span class="token punctuation">.</span><span class="token function">playGame</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">LoL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+C<span class="token operator">:</span>\code\ide\java\jdk1<span class="token number">.8</span>\bin\java<span class="token punctuation">.</span>exe <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+打开电脑
+射击！
+<span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
+打开电脑
+补兵！</code></pre>
 
             </div>
             <hr/>
@@ -498,7 +551,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/">https://hhhoscar.github.io/2020/07/05/gai-lu-lun-zong-jie/</a>
+                    <a href="https://hhhoscar.github.io/2021/08/16/java-dui-xiang-lei-xing-zhuan-huan/">https://hhhoscar.github.io/2021/08/16/java-dui-xiang-lei-xing-zhuan-huan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -536,8 +589,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">
-                                    <span class="chip bg-color">概率论</span>
+                                <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">Java基础</span>
                                 </a>
                             
                         </div>
@@ -688,29 +741,81 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/05/07/jvm-ji-ben-jia-gou/">
+                <a href="/2021/08/16/java-dui-xiang-lei-xing-zhuan-huan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="JVM基本架构">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java对象类型转换">
                         
-                        <span class="card-title">JVM基本架构</span>
+                        <span class="card-title">Java对象类型转换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            对Java JVM架构的基本认识
+                            Java对象类型转换将一个类型强制转换成另一种类型的过程被称为类型装换。而Java中的对象类型转换，必须是有继承关系的对象，而不能是任意类型的对象。
+如果对不存在继承关系的对象进行强制类型转换，会抛出强制类型转换异常（java.lang.C
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-07
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/07/06/java-bing-fa-yi-xian-cheng-an-quan-yu-gong-xiang-zi-yuan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Java并发（一）线程安全与共享资源">
+                        
+                        <span class="card-title">Java并发（一）线程安全与共享资源</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Java并发（一）线程安全与共享资源​    能够安全的同时被多个线程同时调用的代码叫做线程安全。一段代码是线程安全的，等价于这段代码不包含race conditions（竞争条件）。而竞争条件只可能发生在多个线程同时更新共享资源的时候。因
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -726,61 +831,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/08/hexo-da-jian-bo-ke-ji-ben-yong-fa/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="hexo搭建博客基本用法">
-                        
-                        <span class="card-title">hexo搭建博客基本用法</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            本文对hexo搭建博客的基本用法做一个记录
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    工具
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                    <a href="/tags/Github/">
-                        <span class="chip bg-color">Github</span>
+                    <a href="/tags/Java%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">Java并发</span>
                     </a>
                     
                 </div>
@@ -955,13 +1007,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 
