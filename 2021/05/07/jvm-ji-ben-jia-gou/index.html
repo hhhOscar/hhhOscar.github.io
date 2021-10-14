@@ -426,7 +426,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-08-13
+                    2021-10-12
                 </div>
                 
 
@@ -486,7 +486,7 @@
 </li>
 </ul>
 <p>我们知道，方法调用指令中的符号引用会在执行之前解析成实际引用。</p>
-<p>对于静态绑定的方法调用而言，实际引用将指向具体的目标方法。对于动态绑定的方法调用而言，实际引用则是方法表的索引值（实际上并不仅是索引值）。在执行过程中，Java 虚拟机将获取调用者的实际类型，并在该实际类型的虚方法表中，根据索引值获得目标方法。这个过程便是动态绑定。</p>
+<p>对于静态绑定的方法调用（重载）而言，实际引用将指向具体的目标方法。对于动态绑定的方法调用（重写，即多态）而言，实际引用则是方法表的索引值（实际上并不仅是索引值）。在执行过程中，Java 虚拟机将获取调用者的<code>实际类型</code>，并在该<code>实际类型的虚方法表</code>中，根据索引值获得目标方法。这个过程便是动态绑定。</p>
 <p>让我们来看一个例子：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Passenger</span> <span class="token punctuation">{</span>
   <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">passThroughImmigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -509,15 +509,15 @@ passenger<span class="token punctuation">.</span><span class="token function">pa
 
 <p>在我们的例子中，Passenger 类的方法表包括两个方法：toString() 和 passThroughImmigration()，它们分别对应 0 号和 1 号。之所以方法表调换了 toString() 方法和 passThroughImmigration() 方法的位置，是因为 toString() 方法的索引值需要与 Object 类中同名方法的索引值一致。为了保持简洁，这里我就不考虑 Object 类中的其他方法。</p>
 <p>ForeignerPassenger 的方法表同样有两行。其中，0 号方法指向继承而来的 Passenger 类的 toString() 方法。1 号方法则指向自己重写的 passThroughImmigration() 方法。</p>
-<p>ChinesePassenger 的方法表则包括三个方法，除了继承而来的 Passenger 类的 toString() 方法，自己重写的 passThroughImmigration() 方法之外，还包括独有的 visitDutyFreeShops 方法。</p>
+<p>ChinesePassenger 的方法表则包括三个方法，除了继承而来的 Passenger 类的 toString() 方法，自己重写的 passThroughImmigration() 方法之外，<strong>还包括独有的 visitDutyFreeShops 方法</strong>。</p>
 <pre class=" language-java"><code class="language-java">Passenger passenger <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 passenger<span class="token punctuation">.</span><span class="token function">passThroughImmigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>这里，JVM的工作可以想象为导航员。每当来了一个乘客需要出境，导航员会先问是中国人还是外国人（获取动态类型），然后翻出中国人 / 外国人对应的小册子（获取动态类型的方法表），小册子的第 1 页便写着应该如何办理手续（用 1 作为索引来查找方法表所对应的目标方法）。</p>
+<p>这里，JVM的工作可以想象为导航员。每当来了一个乘客需要出境，导航员会先问是中国人还是外国人（<code>获取动态类型</code>），然后翻出中国人 / 外国人对应的小册子（获取动态类型的方法表），小册子的第 1 页便写着应该如何办理手续（用 1 作为索引来查找方法表所对应的目标方法）。</p>
 </li>
 </ol>
 <h4 id="解析（Resolution）"><a href="#解析（Resolution）" class="headerlink" title="解析（Resolution）"></a>解析（Resolution）</h4><p>在此阶段，将<code>符号引用</code>替换为在<code>运行时常量池</code>中存在的<code>直接引用</code>。</p>
 <p>如果符号引用指向一个未被加载的类，或者未被加载类的字段或方法，那么解析将触发这个类的加载（但未必触发这个类的链接以及初始化。）</p>
-<p>此外，Java 虚拟机规范并没有要求在链接过程中完成解析。它仅规定了：如果某些字节码使用了符号引用，那么在执行这些字节码之前，需要完成对这些符号引用的解析。</p>
+<p>此外，<strong>Java 虚拟机规范并没有要求在链接过程中完成解析</strong>。它仅规定了：如果某些字节码使用了符号引用，那么在执行这些字节码之前，需要完成对这些符号引用的解析。</p>
 <h3 id="初始化（Initialization）"><a href="#初始化（Initialization）" class="headerlink" title="初始化（Initialization）"></a><strong>初始化（Initialization）</strong></h3><p>在 Java 代码中，如果要初始化一个静态字段，我们可以在声明时直接赋值，也可以在静态代码块中对其赋值。</p>
 <ul>
 <li><p>如果直接赋值的静态字段被 final 所修饰，并且它的类型是基本类型或字符串时，那么该字段便会被 Java 编译器标记成常量值（ConstantValue），其初始化直接由 Java 虚拟机完成。</p>
@@ -542,6 +542,7 @@ passenger<span class="token punctuation">.</span><span class="token function">pa
 <p>下面代码是情况4的一个例子：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
   <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
   <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">LazyHolder</span> <span class="token punctuation">{</span>
     <span class="token keyword">static</span> <span class="token keyword">final</span> Singleton INSTANCE <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
@@ -1052,7 +1053,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">6.5k</span>&nbsp;字
+                class="white-color">35.2k</span>&nbsp;字
             
             
             
